@@ -1,6 +1,7 @@
 package cn.thyonline.service;
 
 import cn.thyonline.dataobject.ProductInfo;
+import cn.thyonline.dto.CartDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -39,5 +40,16 @@ public interface ProductInfoService {
      */
     ProductInfo save(ProductInfo productInfo);
 
+    /**
+     * 加库存
+     * @param cartDTOS
+     */
+    void increaseStock(List<CartDTO> cartDTOS);
+
+    /**
+     * 减库存
+     * @param cartDTOS
+     */
+    void decreaseStock(List<CartDTO> cartDTOS);
 
 }
