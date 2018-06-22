@@ -12,6 +12,8 @@
 - 使用jdk1.8表达式lambda
 - 支持订单校验
 - 支持全局异常处理
+- 微信网页授权
+- 使用Charles抓包测试
 
 ### 启动
 > 修改application.properties配置
@@ -32,7 +34,6 @@
 
 > 首页商品及商品分类展示
 - 
-
         GET /sell/buyer/product/list
 
 
@@ -66,7 +67,6 @@
 
 > 创建订单
 - 
-
         POST /sell/buyer/order/create
 
 - 参数
@@ -93,7 +93,6 @@
 > 订单列表
 
 - 
-
         GET /sell/buyer/order/list
 
 
@@ -180,6 +179,20 @@
             "msg": "成功",
             "data": null
         }
+        
+> 获取openid
+
+- 
+        重定向到 /sell/wechat/authorize
+
+
+- 参数
+
+        returnUrl: http://xxx.com/abc  //【必填】
+
+- 返回
+
+        http://xxx.com/abc?openid=oZxSYw5ldcxv6H0EU67GgSXOUrVg
 
 
 

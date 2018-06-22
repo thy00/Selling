@@ -10,3 +10,7 @@ spring:
     default-property-inclusion: non_null #返回的json数据不存在null值
 server:
   context-path: /sell
+
+wechat:
+  mpAppId: wxa8bb2e54713cb7be
+  mpAppSecret: 0ab67e96f71536f279464f6f843e977c
