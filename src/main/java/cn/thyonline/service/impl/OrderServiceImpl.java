@@ -13,6 +13,7 @@ import cn.thyonline.enums.PayStatusEnum;
 import cn.thyonline.enums.ResultEnum;
 import cn.thyonline.exception.SellException;
 import cn.thyonline.service.OrderService;
+import cn.thyonline.service.PayService;
 import cn.thyonline.service.ProductInfoService;
 import cn.thyonline.utils.KeyUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -47,6 +48,9 @@ public class OrderServiceImpl implements OrderService {
 
     @Autowired
     private OrderMasterRepository masterRepository;
+
+    @Autowired
+    private PayService payService;
 
     @Override
     @Transactional//添加事务
@@ -144,7 +148,8 @@ public class OrderServiceImpl implements OrderService {
         infoService.increaseStock(cartDTOS);
         //4、已支付情况下退款
         if (orderDTO.getPayStatus().equals(PayStatusEnum.SUCCESSC.getCode())){
-            //TODO
+            //TODO，已修改
+            payService.refund(orderDTO);
         }
         return orderDTO;
     }
@@ -192,5 +197,13 @@ public class OrderServiceImpl implements OrderService {
             throw new SellException(ResultEnum.ORDER_UPDATE_FAIL);
         }
         return orderDTO;
+    }
+
+    @Override
+    public Page<OrderDTO> findList(Pageable pageable) {
+        Page<OrderMaster> masters = masterRepository.findAll(pageable);
+        List<OrderDTO> dtos = OrderMaster2OrderDTOConverter.convert(masters.getContent());
+        Page<OrderDTO> orderDTOS=new PageImpl<OrderDTO>(dtos,pageable,masters.getTotalElements());
+        return orderDTOS;
     }
 }

@@ -14,6 +14,7 @@
 - 支持全局异常处理
 - 微信网页授权
 - 使用Charles抓包测试
+- 使用freemarker网页静态化
 
 ### 启动
 > 修改application.properties配置
@@ -193,6 +194,35 @@
 - 返回
 
         http://xxx.com/abc?openid=oZxSYw5ldcxv6H0EU67GgSXOUrVg
+
+> 支付订单
+
+- 
+        重定向到 /sell/pay/create
+
+
+- 参数
+
+        orderId: 161899085773669363
+        returnUrl: http://xxx.com/abc/order/161899085773669363
+
+- 返回
+
+        http://xxx.com/abc/order/161899085773669363
+        
+> 微信支付异步通知
+
+- 
+        重定向到 /sell/pay/notify
+
+
+- 参数
+
+        微信传递过来的json对象
+
+- 返回
+
+        http://xxx.com/abc/sell/pay/success
 
 
 
