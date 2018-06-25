@@ -5,6 +5,7 @@ import cn.thyonline.enums.ProductStatusEnum;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.omg.CORBA.PUBLIC_MEMBER;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
@@ -59,5 +60,17 @@ public class ProductInfoServiceImplTest {
         info.setCategoryType(4);
         ProductInfo save = infoService.save(info);
         Assert.assertNotEquals(null,save);
+    }
+
+    @Test
+    public void onSale() {
+        ProductInfo productInfo = infoService.onSale("12345");
+        Assert.assertTrue("商品上架成功",productInfo!=null);
+    }
+
+    @Test
+    public void offSale() {
+        ProductInfo productInfo = infoService.offSale("12345");
+        Assert.assertTrue("商品下架成功",productInfo!=null);
     }
 }

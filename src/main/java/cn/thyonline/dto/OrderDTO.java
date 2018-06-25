@@ -1,10 +1,15 @@
 package cn.thyonline.dto;
 
 import cn.thyonline.dataobject.OrderDetail;
+import cn.thyonline.enums.OrderStatusEnum;
+import cn.thyonline.enums.PayStatusEnum;
+import cn.thyonline.utils.EnumUtil;
 import cn.thyonline.utils.serializer.Date2LongSerializer;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.Data;
+import org.apache.commons.lang3.EnumUtils;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -33,5 +38,15 @@ public class OrderDTO {
     @JsonSerialize(using = Date2LongSerializer.class)
     private Date updateTime;
 
-    private List<OrderDetail> orderDetails;
+    private List<OrderDetail> orderDetails;//用来数据传输
+
+    //卖家端页面展示
+    @JsonIgnore
+    public OrderStatusEnum getOrderStatusEnum(){
+        return EnumUtil.getByCode(orderStatus,OrderStatusEnum.class);
+    }
+    @JsonIgnore
+    public PayStatusEnum getPayStatusEnum(){
+        return EnumUtil.getByCode(payStatus,PayStatusEnum.class);
+    }
 }
