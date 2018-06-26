@@ -28,7 +28,7 @@ public class ProductInfo {
     private Integer productStock;//库存
     private String productDescription;
     private String productIcon;//小图地址
-    private Integer productStatus;//0 正常 1 下架
+    private Integer productStatus;//0 正常 1 下架,默认在架
     private Integer categoryType;//类目编号
     private Date createTime;
     private Date updateTime;

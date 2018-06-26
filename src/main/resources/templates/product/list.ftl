@@ -44,9 +44,9 @@
                                 <td><a href="/sell/seller/product/index?productId=${productInfo.productId}">修改</a></td>
                                 <td>
                                         <#if productInfo.productStatus==0>
-                                            <a href="/sell/seller/product/off_sale?productId=${(productInfo.productId)!""}">下架</a>
+                                            <a href="/sell/seller/product/off_sale?productId=${productInfo.productId}">下架</a>
                                         <#elseif productInfo.productStatus==1>
-                                            <a href="/sell/seller/product/on_sale?productId=${(productInfo.productId)!""}">上架</a>
+                                            <a href="/sell/seller/product/on_sale?productId=${productInfo.productId}">上架</a>
                                         </#if>
                                 </td>
                             </tr>

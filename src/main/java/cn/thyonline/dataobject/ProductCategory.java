@@ -21,6 +21,8 @@ public class ProductCategory {
     private Integer categoryId;//id
     private String categoryName;//名字
     private Integer categoryType;//编号
+    private Date createTime;
+    private Date updateTime;
 
     public ProductCategory() {
     }

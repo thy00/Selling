@@ -12,9 +12,7 @@ import cn.thyonline.enums.OrderStatusEnum;
 import cn.thyonline.enums.PayStatusEnum;
 import cn.thyonline.enums.ResultEnum;
 import cn.thyonline.exception.SellException;
-import cn.thyonline.service.OrderService;
-import cn.thyonline.service.PayService;
-import cn.thyonline.service.ProductInfoService;
+import cn.thyonline.service.*;
 import cn.thyonline.utils.KeyUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
@@ -51,6 +49,12 @@ public class OrderServiceImpl implements OrderService {
 
     @Autowired
     private PayService payService;
+
+    @Autowired
+    private PushMessageService messageService;
+
+    @Autowired
+    private WebSocket webSocket;
 
     @Override
     @Transactional//添加事务
@@ -90,6 +94,8 @@ public class OrderServiceImpl implements OrderService {
         ).collect(Collectors.toList());
 
         infoService.decreaseStock(cartDTOS);
+
+        webSocket.sendMessage("有新订单了,订单号为："+orderId);
         return orderDTO;
     }
 
@@ -171,6 +177,10 @@ public class OrderServiceImpl implements OrderService {
             log.error("【完结订单】更新失败，orderMaster={}",orderMaster);
             throw new SellException(ResultEnum.ORDER_UPDATE_FAIL);
         }
+
+        //推送微信模板消息
+        messageService.orderStatus(orderDTO);
+
         return orderDTO;
     }
 

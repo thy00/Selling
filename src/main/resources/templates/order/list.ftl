@@ -78,6 +78,62 @@
                 </div>
             </div>
         </div>
+
+
+    <div class="modal fade" id="myModal" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title" id="myModalLabel">
+                        新消息
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    你有新的订单
+                </div>
+                <div class="modal-footer">
+                    <button onclick="javascript:document.getElementById('notice').pause()" type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <button onclick="location.reload()" type="button" class="btn btn-primary">查看新订单</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <#--音乐播放-->
+        <audio id="notice" loop="loop">
+            <source src="/sell/mp3/song.mp3" type="audio/mpeg">
+        </audio>
+    <#--客户端消息推送-->
+    <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script>
+        var websocket=null;
+        if ('WebSocket'in window) {
+            websocket = new WebSocket('ws://thyonline.mynatapp.cc/sell/webSocket')
+        }else {
+            alert('该浏览器不支持websocket!');
+        }
+
+        websocket.onopen=function (ev) {
+            console.log('建立连接');
+        }
+        websocket.onclose=function (ev) {
+            console.log('连接关闭');
+        }
+        websocket.onmessage = function (ev) {
+            console.log('收到消息：'+ev.data);
+            //弹窗提醒、播放音乐等等
+            $('#myModal').modal('show');
+            document.getElementById('notice').play();
+        }
+        websocket.onerror = function (ev) {
+            alert('websocket通信发生错误！');
+        }
+        window.onbeforeunload = function (ev) {
+            websocket.close();
+        }
+
+    </script>
     </body>
 </html>
 

@@ -8,17 +8,30 @@ spring:
     show-sql: true
   jackson:
     default-property-inclusion: non_null #返回的json数据不存在null值
+  redis:
+    host: 192.168.199.232
+    port: 6379
+    password:
 server:
   context-path: /sell
 
 wechat:
   mpAppId: wxa8bb2e54713cb7be
   mpAppSecret: 0ab67e96f71536f279464f6f843e977c
+  openAppId:
+  openAppSecret:
   mchId:
   mchKey:
   keyPath:
   notifyUrl:  http://thyonline.mynatapp.cc/sell/pay/notify
+  templateId:
+    orderStatus: bUbB9NpebzTevoWLRO1vyY4kWqOYX98OeOnfCJMOjEc
 #  mchId: 1483469312
 #  mchKey: 06C56A89949D617xxxxxxxxxxx
 #  keyPath: /var/weixin_cert/h5.p12
 #  notifyUrl: http://thyonline.mynatapp.cc/sell/pay/notify
+
+projectUrl:
+  wechatMpAuthorize: http://thyonline.mynatapp.cc
+  wechatOpenAuthorize: http://thyonline.mynatapp.cc
+  sellUrl: http://thyonline.mynatapp.cc

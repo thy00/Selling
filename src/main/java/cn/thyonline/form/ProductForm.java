@@ -1,5 +1,6 @@
 package cn.thyonline.form;
 
+import cn.thyonline.enums.ProductStatusEnum;
 import lombok.Data;
 
 import javax.persistence.Id;
@@ -19,6 +20,6 @@ public class ProductForm {
     private Integer productStock;//库存
     private String productDescription;
     private String productIcon;//小图地址
-    private Integer productStatus;//0 正常 1 下架
+    private Integer productStatus=ProductStatusEnum.UP.getCode();//0 正常 1 下架
     private Integer categoryType;//类目编号
 }

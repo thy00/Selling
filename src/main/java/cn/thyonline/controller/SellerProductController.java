@@ -7,6 +7,7 @@ import cn.thyonline.enums.ResultEnum;
 import cn.thyonline.form.ProductForm;
 import cn.thyonline.service.ProductCategoryService;
 import cn.thyonline.service.ProductInfoService;
+import cn.thyonline.utils.KeyUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -131,8 +132,14 @@ public class SellerProductController {
         }
 
         ProductInfo productInfo = new ProductInfo();
-        BeanUtils.copyProperties(productForm,productInfo);
         try {
+            //判断是否是新增商品，如果是则需要添加商品id
+            if (!StringUtils.isEmpty(productForm.getProductId())){
+                productInfo = infoService.findOne(productForm.getProductId());//验证是否是已经存在的商品
+            }else {
+                productForm.setProductId(KeyUtil.genUnigueKey());
+            }
+            BeanUtils.copyProperties(productForm,productInfo);
             ProductInfo result = infoService.save(productInfo);
         } catch (Exception e) {
             map.put("msg",e.getMessage());
