@@ -1,12 +1,14 @@
 package cn.thyonline.exception;
 
 import cn.thyonline.enums.ResultEnum;
+import lombok.Getter;
 
 /**
  * @Description:异常处理
  * @Author: Created by thy
  * @Date: 2018/6/21 13:13
  */
+@Getter
 public class SellException extends RuntimeException{
     private Integer code;
 
