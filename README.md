@@ -1,6 +1,6 @@
 # Selling
 
-### 使用springboot的仿饿了么微信商城的后端
+### 使用springboot的仿饿了么微信商场的后端
 
 - jpa持久层方案
 - 添加springboottest
@@ -240,8 +240,6 @@
 > 取消订单
 
 > 完结订单
-
-> 新订单消息提醒
 
 ##### 商品
 
