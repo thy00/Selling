@@ -1,6 +1,6 @@
 # Selling
 
-### 使用springboot的仿饿了么微信小程序的后端
+### 使用springboot的仿饿了么微信商场的后端
 
 - jpa持久层方案
 - 添加springboottest
